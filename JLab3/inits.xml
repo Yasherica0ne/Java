@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employees>
+    <employee>
+        <age>23</age>
+        <gender>true</gender>
+        <name>IvanIngeneer</name>
+        <qualification>junior</qualification>
+        <salary>300</salary>
+    </employee>
+    <employee>
+        <age>24</age>
+        <gender>true</gender>
+        <name>IvanSysAdmon</name>
+        <qualification>senior</qualification>
+        <salary>250</salary>
+    </employee>
+    <employee>
+        <age>20</age>
+        <gender>true</gender>
+        <name>Vitaliy</name>
+        <qualification>senior</qualification>
+        <salary>1500</salary>
+    </employee>
+    <employee>
+        <age>19</age>
+        <gender>true</gender>
+        <name>Victor</name>
+        <qualification>senior</qualification>
+        <salary>2500</salary>
+    </employee>
+    <employee>
+        <age>24</age>
+        <gender>true</gender>
+        <name>IvanProga</name>
+        <qualification>junior</qualification>
+        <salary>350</salary>
+    </employee>
+    <employee>
+        <age>18</age>
+        <gender>true</gender>
+        <name>Andrej</name>
+        <qualification>middle</qualification>
+        <salary>1000</salary>
+    </employee>
+</employees>
