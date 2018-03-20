@@ -47,14 +47,13 @@ public class Main
 //			Serializer.Serialize(manager1, filePath);
 			EmployeesManager manager2 = new EmployeesManager();
 
-			// SAX Parser
-			//SAXParserFactory factory = SAXParserFactory.newInstance();
-			//SAXParser parser = factory.newSAXParser();
-			//SAX saxp = new SAX();
-			//parser.parse(new File(DeserializeFilePath), saxp);
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser parser = factory.newSAXParser();
+			SAX saxp = new SAX();
+			parser.parse(new File(DeserializeFilePath), saxp);
 
-			//manager2.setEmployeeList(saxp.getResult());
-			//manager2.printEmployees();
+			manager2.setEmployeeList(saxp.getResult());
+			manager2.printEmployees();
 			LOG.info("Количество сотрудников в manager1: " + director.getEmployeesCount(manager1));
 			director.sortEmployeers(manager1); // По зарплате
 			LOG.info("Сортировка по зарпалате");
