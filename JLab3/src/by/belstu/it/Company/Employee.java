@@ -16,7 +16,7 @@ public class Employee
 	}
 	private String name;
 	private Qualification qualification;
-	private boolean gender;
+	private boolean isMale;
 	private int age;
 	private int salary;
 
@@ -31,7 +31,7 @@ public class Employee
 		return emplr + "{" +
 				"name='" + name + '\'' +
 				", qualification=" + qualification +
-				", isMale=" + gender +
+				", isMale=" + isMale +
 				", age=" + age +
 				", salary=" + salary +
 				'}';
@@ -49,10 +49,10 @@ public class Employee
 		this.name = name;
 	}
 
-	public Employee(String name, Qualification qualification, boolean gender, int age, int salary)
+	public Employee(String name, Qualification qualification, boolean isMale, int age, int salary)
 	{
 		this.qualification = qualification;
-		this.gender = gender;
+		this.isMale = isMale;
 		this.age = age;
 		this.name = name;
 		this.salary = salary;
@@ -70,14 +70,14 @@ public class Employee
 		this.qualification = qualification;
 	}
 
-	public boolean isGender()
+	public boolean isMale()
 	{
-		return gender;
+		return isMale;
 	}
 
-	public void setGender(boolean gender)
+	public void setMale(boolean male)
 	{
-		this.gender = gender;
+		this.isMale = male;
 	}
 
 	public int getAge()

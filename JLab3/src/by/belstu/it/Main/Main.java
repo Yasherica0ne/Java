@@ -2,17 +2,22 @@ package by.belstu.it.Main;
 
 import by.belstu.it.Company.Director;
 import by.belstu.it.Company.Employee;
+import by.belstu.it.Company.SysAdmin;
 import by.belstu.it.CompanyManager.EmployeesManager;
 import by.belstu.it.EmployeeFactory.Factories;
 import by.belstu.it.EmployeeFactory.IngeneerFactory;
 import by.belstu.it.EmployeeFactory.ProgrammerFactory;
 import by.belstu.it.EmployeeFactory.SysAdminFactory;
+import by.belstu.it.Serialize.SAX;
 import by.belstu.it.Serialize.Serializer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
+import com.google.gson.*;
 
-import java.io.Serializable;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
 
 public class Main
 {
@@ -24,7 +29,8 @@ public class Main
 	{
 		try
 		{
-			String filePath = "inits.xml";
+			//String SerializeFilePath = "inits1.xml";
+			String DeserializeFilePath = "files/inits.xml";
 			LOG.info("Starting program_____________________________");
 			//logger.debug("Hello world.");
 			Director director = Director.getDirector();
@@ -40,14 +46,27 @@ public class Main
 			LOG.info("Manager2");
 //			Serializer.Serialize(manager1, filePath);
 			EmployeesManager manager2 = new EmployeesManager();
-			manager2.setEmployeeList(Serializer.Deserialize(filePath));
-			manager2.printEmployees();
+
+			// SAX Parser
+			//SAXParserFactory factory = SAXParserFactory.newInstance();
+			//SAXParser parser = factory.newSAXParser();
+			//SAX saxp = new SAX();
+			//parser.parse(new File(DeserializeFilePath), saxp);
+
+			//manager2.setEmployeeList(saxp.getResult());
+			//manager2.printEmployees();
 			LOG.info("Количество сотрудников в manager1: " + director.getEmployeesCount(manager1));
 			director.sortEmployeers(manager1); // По зарплате
 			LOG.info("Сортировка по зарпалате");
 			manager1.printEmployees();
 			LOG.info("Поиск сотрудников с квалификацией senior");
 			EmployeesManager.printList(director.findEmployee(manager1, Employee.Qualification.senior));
+			LOG.info("Json serialization");
+			Serializer.JSerialize("files/JsonInits.json", manager1);
+			LOG.info("Deserialization");
+			manager2.setEmployeeList(Serializer.JDeserialize("files/JsonInits.json"));
+			LOG.info("Manager 2");
+			manager2.printEmployees();
 			LOG.info("End program_____________________________");
 		}
 		catch (Exception ex)
