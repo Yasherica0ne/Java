@@ -3,11 +3,15 @@ package by.belstu.it.Serialize;
 import by.belstu.it.Company.Employee;
 import by.belstu.it.CompanyManager.EmployeesManager;
 import com.google.gson.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -32,6 +36,39 @@ public class Serializer // implements JsonSerializer<Employee>, JsonDeserializer
 		//We had written this file in marshalling example
 		EmployeesManager manager = (EmployeesManager) jaxbUnmarshaller.unmarshal(new File(fileName));
 		return manager.getEmployeeList();
+	}
+
+	public static void JInstSerialize(String fileName, Employee manager)
+	{
+		try (OutputStreamWriter oos = new OutputStreamWriter(new FileOutputStream(fileName)))
+		{
+			Gson gson = new Gson();
+			String s = gson.toJson(manager);
+			oos.write(s);
+		} catch (Exception ex)
+		{
+			Employee.getLOG().error(ex.getMessage());
+		}
+	}
+
+	public static Employee JInstDeserialize(String fileName)
+	{
+		Employee manager = null;
+		try (FileReader isr = new FileReader(fileName))
+		{
+			Gson gson = new Gson();
+			StringBuilder s = new StringBuilder();
+			int c;
+			while ((c = isr.read()) != -1)
+			{
+				s.append((char) c);
+			}
+			manager = gson.fromJson(s.toString(), Employee.class);
+		} catch (Exception ex)
+		{
+			Employee.getLOG().error(ex.getMessage());
+		}
+		return manager;
 	}
 
 	public static void JSerialize(String fileName, EmployeesManager manager)
@@ -65,5 +102,14 @@ public class Serializer // implements JsonSerializer<Employee>, JsonDeserializer
 			Employee.getLOG().error(ex.getMessage());
 		}
 		return manager.getEmployeeList();
+	}
+
+	public static List<Employee> SAXDEserialize(String file) throws ParserConfigurationException, SAXException, IOException
+	{
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParser parser = factory.newSAXParser();
+		SAX saxp = new SAX();
+		parser.parse(new File(file), saxp);
+		return saxp.getResult();
 	}
 }

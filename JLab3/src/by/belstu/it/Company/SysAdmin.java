@@ -14,6 +14,14 @@ public class SysAdmin extends Employee
 		}
 	}
 
+	public static String IngeneerWork = "SysAdmins work";
+
+	@Override
+	public String DoingWork()
+	{
+		return "SysAdmins work";
+	}
+
 	public SysAdmin()
 	{
 		super("IvanSysAdmon", Qualification.senior, true, 24, getSalary(Qualification.junior));

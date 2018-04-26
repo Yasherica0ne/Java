@@ -20,6 +20,13 @@ public class Employee
 	private int age;
 	private int salary;
 
+	public static String EmployeeWork = "Employees work";
+
+	public String DoingWork()
+	{
+		return "Employees work";
+	}
+
 	@Override
 	public String toString()
 	{

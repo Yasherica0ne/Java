@@ -8,16 +8,10 @@ import by.belstu.it.EmployeeFactory.Factories;
 import by.belstu.it.EmployeeFactory.IngeneerFactory;
 import by.belstu.it.EmployeeFactory.ProgrammerFactory;
 import by.belstu.it.EmployeeFactory.SysAdminFactory;
-import by.belstu.it.Serialize.SAX;
 import by.belstu.it.Serialize.Serializer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import com.google.gson.*;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
 
 public class Main
 {
@@ -46,13 +40,7 @@ public class Main
 			LOG.info("Manager2");
 //			Serializer.Serialize(manager1, filePath);
 			EmployeesManager manager2 = new EmployeesManager();
-
-			SAXParserFactory factory = SAXParserFactory.newInstance();
-			SAXParser parser = factory.newSAXParser();
-			SAX saxp = new SAX();
-			parser.parse(new File(DeserializeFilePath), saxp);
-
-			manager2.setEmployeeList(saxp.getResult());
+			manager2.setEmployeeList(Serializer.SAXDEserialize(DeserializeFilePath));
 			manager2.printEmployees();
 			LOG.info("Количество сотрудников в manager1: " + director.getEmployeesCount(manager1));
 			director.sortEmployeers(manager1); // По зарплате
@@ -66,6 +54,7 @@ public class Main
 			manager2.setEmployeeList(Serializer.JDeserialize("files/JsonInits.json"));
 			LOG.info("Manager 2");
 			manager2.printEmployees();
+			Serializer.JInstSerialize("files/JsonInits.json", manager1.getEmployeeList().get(0));
 			LOG.info("End program_____________________________");
 		}
 		catch (Exception ex)
